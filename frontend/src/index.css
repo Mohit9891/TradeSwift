@@ -1,0 +1,147 @@
+/* :root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+.nav-link {
+  margin-left: 40px;
+}
+
+.nav-hover {
+  color: #6c757d; /* muted color */
+  transition: color 0.3s ease;
+}
+
+.nav-hover:hover {
+  color: #007bff; /* bootstrap primary or any color you like */
+}
+.bio {
+  font-size: 18px;
+  line-height: 35px;
+}
+.bio p {
+  color: #6c757d; /* muted color */
+}
+
+.image-nitin {
+  width: 65%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.Nikhil {
+  width: 65%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.Kailash {
+  width: 65%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.Venu {
+  width: 65%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Signup-heading {
+  margin-top: 80px;
+  
+}
+.Signup-heading-1{
+  color: #4a5055;
+  font-size: 45px;
+ 
+
+}
+.Signup-heading-2{
+  color: #6c757d;
+  font-size: 20px;
+   margin-top: 15px;
+
+}
+.SignUp-form{
+  padding: 40px;
+}
+
+
+.account_openImage {
+  width: 80%;
+  margin-left: 140px;
+}
+.Signup-Main {
+  margin-top: 50px;
+}
+
+.Team-1{
+  margin-bottom: 200px;
+}
+.Team-2{
+  margin-bottom: 200px;
+}
+
