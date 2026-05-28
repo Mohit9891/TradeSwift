@@ -843,4 +843,31 @@ hr {
 }
 
 
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  padding-right: 16px;
+}
+
+.topbar-mobile {
+  font-size: 14px;
+  color: #555;
+}
+
+.logout-btn {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  background-color: #c62828;
+}
+
 

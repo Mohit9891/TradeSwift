@@ -1,24 +1,18 @@
 import React from 'react';
-import LeftSection from './LeftSection';
-import RightSection from './RighsSection';
 import Hero from './Hero';
+import LeftSection from './LeftSection';
+import RighsSection from './RighsSection';
 import Universe from './Universe';
-// import OpenAccount from '../OpenAccount';
-
-
-
 
 function ProductPage() {
-    return ( 
-        <>
-        <Hero/>
-        <LeftSection/>
-        <RightSection/>
-         <Universe/>
-        {/* <OpenAccount/> */}
-       
-        </>
-     );
+  return (
+    <div>
+      <Hero />
+      <LeftSection />
+      <RighsSection />
+      <Universe />
+    </div>
+  );
 }
 
 export default ProductPage;

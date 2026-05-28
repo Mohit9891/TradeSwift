@@ -5,22 +5,22 @@ const mongoose = require("mongoose");
 const { HoldingsModel } = require("./models/HoldingsModel");
 const { PositionsModel } = require("./models/PositionsModel");
 const { OrdersModel } = require("./models/OrdersModel");
-
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const authRoutes = require("./routes/auth");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 
 const app = express();
-mongoose.connect(uri);
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
+
+app.get("/", (req, res) => res.send("working"));
 
 app.get("/allHoldings", async (req, res) => {
   let allHoldings = await HoldingsModel.find({});
@@ -43,13 +43,13 @@ app.post("/newOrders", async (req, res) => {
   res.send();
 });
 
-
-app.listen(3002, () => {
-  console.log("app started");
-  mongoose.connect(uri);
-  console.log("DB connected");
-});
-
-app.get("/", (req, res) => {
-  res.send("working");
-});
+// Connect to MongoDB first, then start server
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log("DB connected");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => console.log("DB connection error:", err));
