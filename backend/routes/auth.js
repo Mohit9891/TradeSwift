@@ -1,20 +1,19 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET || "Chill";
+const User = require("../models/User");
 
-// User Model
-const User = mongoose.model("User", new mongoose.Schema({
-  mobile: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-}));
+const JWT_SECRET = process.env.JWT_SECRET || "Chill";
 
 // Signup
 router.post("/signup", async (req, res) => {
   const { mobile, password } = req.body;
+
+  if (!mobile || !password) {
+    return res.status(400).send("Mobile and password are required");
+  }
 
   const userExists = await User.findOne({ mobile });
   if (userExists) return res.status(409).send("Mobile number already registered");

@@ -1,29 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-
 import GeneralContext from "./GeneralContext";
-
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid }) => {
-  const [stockQuantity, setStockQuantity] = useState(1);
-  const [stockPrice, setStockPrice] = useState(0.0);
+  const { closeBuyWindow, livePrices } = useContext(GeneralContext);
+  const live = livePrices[uid];
 
-  const handleBuyClick = () => {
-    axios.post("http://localhost:3002/newOrder", {
+  const [stockQuantity, setStockQuantity] = useState(1);
+  const [stockPrice, setStockPrice] = useState(live ? live.price : 0.0);
+
+  // keep the price field synced as new ticks stream in while the window is open
+  useEffect(() => {
+    if (live) setStockPrice(live.price);
+  }, [live?.price]);
+
+  const margin = (stockPrice * stockQuantity).toFixed(2);
+
+  const placeOrder = (mode) => {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
-      mode: "BUY",
+      mode,
     });
-
-    GeneralContext.closeBuyWindow();
-  };
-
-  const handleCancelClick = () => {
-    GeneralContext.closeBuyWindow();
+    closeBuyWindow();
   };
 
   return (
@@ -36,7 +37,7 @@ const BuyActionWindow = ({ uid }) => {
               type="number"
               name="qty"
               id="qty"
-              onChange={(e) => setStockQuantity(e.target.value)}
+              onChange={(e) => setStockQuantity(Number(e.target.value))}
               value={stockQuantity}
             />
           </fieldset>
@@ -47,7 +48,7 @@ const BuyActionWindow = ({ uid }) => {
               name="price"
               id="price"
               step="0.05"
-              onChange={(e) => setStockPrice(e.target.value)}
+              onChange={(e) => setStockPrice(Number(e.target.value))}
               value={stockPrice}
             />
           </fieldset>
@@ -55,14 +56,17 @@ const BuyActionWindow = ({ uid }) => {
       </div>
 
       <div className="buttons">
-        <span>Margin required ₹140.65</span>
+        <span>Margin required ₹{margin}</span>
         <div>
-          <Link className="btn btn-blue" onClick={handleBuyClick}>
+          <button type="button" className="btn btn-blue" onClick={() => placeOrder("BUY")}>
             Buy
-          </Link>
-          <Link to="" className="btn btn-grey" onClick={handleCancelClick}>
+          </button>
+          <button type="button" className="btn btn-grey" onClick={() => placeOrder("SELL")}>
+            Sell
+          </button>
+          <button type="button" className="btn btn-grey" onClick={closeBuyWindow}>
             Cancel
-          </Link>
+          </button>
         </div>
       </div>
     </div>
