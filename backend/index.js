@@ -27,12 +27,19 @@ const uri = process.env.MONGO_URL;
 const app = express();
 const server = http.createServer(app); // socket.io needs the raw http server, not just express
 
+// Extra prod origins via ALLOWED_ORIGINS="https://a.vercel.app,https://b.vercel.app"
+const extraOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
       "http://localhost:5173",
+      ...extraOrigins,
     ],
     credentials: true,
   })
