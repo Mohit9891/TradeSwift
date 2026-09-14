@@ -1,21 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const products = [
   {
-    title: 'Console',
-    description: 'The central dashboard for your Zerodha account. Gain insights into your trades and investments with in-depth reports and visualisations.',
+    title: 'Reports',
+    tag: 'Ledger · tradebook',
+    shot: 'shot-d',
+    initial: 'R',
+    description: 'Every rupee traceable: an append-only funds ledger, margin blocks and a full tradebook for every fill.',
     links: [
-      { label: 'Learn more', url: 'https://zerodha.com/products/console' },
+      { label: 'See pricing', to: '/pricing' },
     ],
-    img: 'media/images/console.png',
   },
   {
-    title: 'Kite Connect API',
-    description: 'Build powerful trading platforms and experiences with our super simple HTTP/JSON APIs. If you are a startup, build your investment app and showcase it to our clientbase.',
+    title: 'Simulator API',
+    tag: 'REST + WebSocket',
+    shot: 'shot-e',
+    initial: 'A',
+    description: 'The same authenticated REST and socket feeds the dashboard uses — 26 endpoints for instruments, orders, positions and funds.',
     links: [
-      { label: 'Learn more', url: 'https://zerodha.com/products/api/' },
+      { label: 'Read support docs', to: '/support' },
     ],
-    img: 'media/images/kiteconnect.png',
   },
 ];
 
@@ -23,20 +28,23 @@ function RighsSection() {
   return (
     <div className="container">
       {products.map((product, index) => (
-        <div key={index} className="row align-items-center" style={{ padding: '60px 0', borderBottom: '1px solid #eee' }}>
-          <div className="col-6" style={{ paddingRight: '40px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: '500' }}>{product.title}</h2>
-            <p style={{ color: '#555', lineHeight: '1.8' }}>{product.description}</p>
+        <div key={index} className="row align-items-center" style={{ padding: '60px 0', borderBottom: '1px solid var(--line)' }}>
+          <div className="col-12 col-md-6" style={{ paddingRight: '40px' }}>
+            <h2 style={{ fontSize: '24px' }}>{product.title}</h2>
+            <p style={{ color: 'var(--ink-soft)', lineHeight: '1.8' }}>{product.description}</p>
             <div style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
               {product.links.map((link, i) => (
-                <a key={i} href={link.url} style={{ color: '#387ed1', textDecoration: 'none' }}>
+                <Link key={i} to={link.to} style={{ textDecoration: 'none' }}>
                   {link.label} →
-                </a>
+                </Link>
               ))}
             </div>
           </div>
-          <div className="col-6">
-            <img src={product.img} alt={product.title} style={{ width: '100%' }} />
+          <div className="col-12 col-md-6">
+            <div className={`product-shot ${product.shot}`}>
+              <span className="shot-tag">{product.tag}</span>
+              <span className="shot-initial">{product.initial}</span>
+            </div>
           </div>
         </div>
       ))}

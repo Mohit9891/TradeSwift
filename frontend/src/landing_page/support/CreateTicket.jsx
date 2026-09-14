@@ -20,7 +20,7 @@ export default function CreateTicket() {
       <button
         onClick={() => setOpen(true)}
         style={{
-          background: "#387ED1",
+          background: "var(--signal)",
           color: "#fff",
           border: "none",
           borderRadius: 4,
@@ -28,7 +28,7 @@ export default function CreateTicket() {
           fontSize: 14,
           fontWeight: 600,
           cursor: "pointer",
-          fontFamily: "'Lato', sans-serif",
+          fontFamily: "var(--font-body)",
         }}
       >
         + Create a ticket
@@ -45,7 +45,7 @@ export default function CreateTicket() {
           <div style={{
             background: "#fff", borderRadius: 6, padding: 32,
             width: 480, boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
-            fontFamily: "'Lato', sans-serif",
+            fontFamily: "var(--font-body)",
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
               <h2 style={{ fontSize: 20, fontWeight: 700, color: "#1a1a1a", margin: 0 }}>Create a ticket</h2>
@@ -53,8 +53,8 @@ export default function CreateTicket() {
             </div>
 
             {submitted ? (
-              <div style={{ textAlign: "center", padding: "24px 0", color: "#387ED1" }}>
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="2" style={{ display: "block", margin: "0 auto 12px" }}>
+              <div style={{ textAlign: "center", padding: "24px 0", color: "var(--signal)" }}>
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="2" style={{ display: "block", margin: "0 auto 12px" }}>
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="9 12 11 14 15 10" />
                 </svg>
@@ -78,11 +78,11 @@ export default function CreateTicket() {
                 >
                   <option value="">Select a category</option>
                   <option>Account Opening</option>
-                  <option>Your Zerodha Account</option>
-                  <option>Kite</option>
+                  <option>Your TradeSwift Account</option>
+                  <option>Dashboard</option>
                   <option>Funds</option>
-                  <option>Console</option>
-                  <option>Coin</option>
+                  <option>Reports</option>
+                  <option>Learn</option>
                 </select>
 
                 <label style={labelStyle}>Description *</label>
@@ -95,7 +95,7 @@ export default function CreateTicket() {
 
                 <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
                   <button onClick={handleSubmit} style={{
-                    flex: 1, background: "#387ED1", color: "#fff", border: "none",
+                    flex: 1, background: "var(--signal)", color: "#fff", border: "none",
                     borderRadius: 4, padding: "11px 0", fontSize: 14, fontWeight: 600,
                     cursor: "pointer",
                   }}>
@@ -134,7 +134,7 @@ const inputStyle = {
   padding: "10px 12px",
   fontSize: 14,
   color: "#333",
-  fontFamily: "'Lato', sans-serif",
+  fontFamily: "var(--font-body)",
   outline: "none",
   boxSizing: "border-box",
 };

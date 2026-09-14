@@ -9,9 +9,9 @@ export default function Hero({ onSearch }) {
 
   return (
     <div style={{
-      background: "#f3f3f3",
+      background: "var(--card)",
       padding: "40px 48px 48px",
-      borderBottom: "1px solid #e0e0e0",
+      borderBottom: "1px solid var(--line)",
     }}>
       <div style={{
         display: "flex",
@@ -26,7 +26,7 @@ export default function Hero({ onSearch }) {
             fontWeight: 700,
             color: "#1a1a1a",
             marginBottom: 24,
-            fontFamily: "'Lato', sans-serif",
+            fontFamily: "var(--font-body)",
           }}>
             Support Portal
           </h1>
@@ -58,7 +58,7 @@ export default function Hero({ onSearch }) {
                 padding: "14px 12px",
                 fontSize: 15,
                 color: "#333",
-                fontFamily: "'Lato', sans-serif",
+                fontFamily: "var(--font-body)",
                 background: "transparent",
               }}
             />
@@ -67,7 +67,7 @@ export default function Hero({ onSearch }) {
 
         <button
           style={{
-            background: "#387ED1",
+            background: "var(--signal)",
             color: "#fff",
             border: "none",
             borderRadius: 4,
@@ -75,7 +75,7 @@ export default function Hero({ onSearch }) {
             fontSize: 14,
             fontWeight: 600,
             cursor: "pointer",
-            fontFamily: "'Lato', sans-serif",
+            fontFamily: "var(--font-body)",
             whiteSpace: "nowrap",
             marginTop: 48,
             marginLeft: 32,

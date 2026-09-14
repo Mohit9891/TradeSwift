@@ -6,7 +6,7 @@ const CATEGORIES = [
   {
     id: "account-opening",
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <line x1="12" y1="8" x2="12" y2="16" />
         <line x1="8" y1="12" x2="16" y2="12" />
@@ -14,104 +14,104 @@ const CATEGORIES = [
     ),
     label: "Account Opening",
     items: [
-      "How do I open a Zerodha account?",
-      "What documents are required for account opening?",
-      "How long does account opening take?",
-      "Can NRIs open a Zerodha account?",
-      "How do I track my account opening status?",
+      "How do I open a demo account?",
+      "Is any KYC or money needed to practice?",
+      "How long does signup take?",
+      "Can I reset my demo account?",
+      "How do I track my signup status?",
     ],
   },
   {
-    id: "zerodha-account",
+    id: "signal-account",
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="1.8">
         <circle cx="12" cy="8" r="4" />
         <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
       </svg>
     ),
-    label: "Your Zerodha Account",
+    label: "Your TradeSwift Account",
     items: [
       "How do I reset my password?",
-      "How to update my bank account details?",
-      "How to enable 2FA on my account?",
-      "How do I close my Zerodha account?",
-      "How to add a nominee?",
+      "How do I get more demo cash?",
+      "How do sessions and logins work?",
+      "How do I close my demo account?",
+      "How do I switch products (CNC/MIS)?",
     ],
   },
   {
-    id: "kite",
+    id: "dashboard",
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="1.8">
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
     ),
-    label: "Kite",
+    label: "Dashboard",
     items: [
-      "How do I place an order on Kite?",
-      "What are the different order types in Kite?",
-      "How to set up alerts in Kite?",
-      "How to use the chart tools in Kite?",
-      "How to enable advanced charts?",
+      "How do I place an order on the dashboard?",
+      "What are the different order types?",
+      "How do DAY, IOC and AMO validity work?",
+      "How to use the chart and depth panels?",
+      "How do watchlists work?",
     ],
   },
   {
     id: "funds",
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <path d="M12 6v6l4 2" />
       </svg>
     ),
     label: "Funds",
     items: [
-      "How to add funds to my Zerodha account?",
-      "How long does fund withdrawal take?",
-      "What are the fund transfer timings?",
-      "How to withdraw funds from Zerodha?",
-      "Why is my withdrawal on hold?",
+      "How do I add demo funds to my account?",
+      "How does the margin block work?",
+      "What are MIS 20% / NRML 12% margins?",
+      "How do I withdraw demo funds?",
+      "Why is my available margin lower than balance?",
     ],
   },
   {
     id: "console",
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <polyline points="12 8 12 12 14 14" />
       </svg>
     ),
-    label: "Console",
+    label: "Reports",
     items: [
-      "How do I download my contract notes?",
+      "How do I view my tradebook?",
       "How to view my P&L report?",
-      "How to get my annual tax statement?",
-      "How do I check my ledger?",
-      "How to view holdings in Console?",
+      "How do I check my funds ledger?",
+      "How are realized profits tracked?",
+      "How to view holdings performance?",
     ],
   },
   {
     id: "coin",
     icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="1.8">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <path d="M12 6v12M9 9h4.5a2.5 2.5 0 0 1 0 5H9" />
       </svg>
     ),
-    label: "Coin",
+    label: "Learn",
     items: [
-      "How to invest in mutual funds via Coin?",
-      "How to start a SIP on Coin?",
-      "How to redeem mutual funds from Coin?",
-      "What are the charges for Coin?",
-      "How to switch mutual fund schemes?",
+      "How do stop-loss orders trigger?",
+      "What is the difference between CNC and MIS?",
+      "How do F&O lot sizes work here?",
+      "What happens on option expiry day?",
+      "How do converts between products work?",
     ],
   },
 ];
 
 const QUICK_LINKS = [
-  "Track account opening",
-  "Track segment activation",
+  "Track signup",
+  "Order types guide",
   "Intraday margins",
-  "Kite user manual",
+  "Dashboard user manual",
   "Learn how to create a ticket",
 ];
 
@@ -143,7 +143,7 @@ function AccordionItem({ item }) {
           border: "none",
           cursor: "pointer",
           textAlign: "left",
-          fontFamily: "'Lato', sans-serif",
+          fontFamily: "var(--font-body)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -151,7 +151,7 @@ function AccordionItem({ item }) {
           <span style={{ fontSize: 16, fontWeight: 600, color: "#1a1a1a" }}>{item.label}</span>
         </div>
         <svg
-          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#387ED1" strokeWidth="2.5"
+          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--signal)" strokeWidth="2.5"
           style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
         >
           <polyline points="6 9 12 15 18 9" />
@@ -168,7 +168,7 @@ function AccordionItem({ item }) {
               style={{
                 display: "block",
                 padding: "8px 0",
-                color: "#387ED1",
+                color: "var(--signal)",
                 fontSize: 14,
                 textDecoration: "none",
                 borderBottom: i < item.items.length - 1 ? "1px solid #f5f5f5" : "none",
@@ -185,7 +185,7 @@ function AccordionItem({ item }) {
             style={{
               display: "inline-block",
               marginTop: 10,
-              color: "#387ED1",
+              color: "var(--signal)",
               fontSize: 13,
               fontWeight: 600,
               textDecoration: "none",
@@ -201,13 +201,13 @@ function AccordionItem({ item }) {
 
 export default function SupportPage() {
   return (
-    <div style={{ minHeight: "100vh", background: "#f7f7f7", fontFamily: "'Lato', sans-serif" }}>
+    <div style={{ minHeight: "100vh", background: "var(--paper)", fontFamily: "var(--font-body)" }}>
 
       {/* Hero */}
       <Hero />
 
       {/* Main content */}
-      <div style={{
+      <div className="support-grid" style={{
         maxWidth: 1200,
         margin: "0 auto",
         padding: "32px 48px",
@@ -237,7 +237,7 @@ export default function SupportPage() {
               <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: i < ANNOUNCEMENTS.length - 1 ? 10 : 0 }}>
                 <span style={{ color: "#555", marginTop: 2 }}>•</span>
                 <a href="#" onClick={(e) => e.preventDefault()} style={{
-                  color: "#387ED1", fontSize: 14, textDecoration: "none", lineHeight: 1.4,
+                  color: "var(--signal)", fontSize: 14, textDecoration: "none", lineHeight: 1.4,
                 }}
                   onMouseEnter={(e) => (e.target.style.textDecoration = "underline")}
                   onMouseLeave={(e) => (e.target.style.textDecoration = "none")}
@@ -273,7 +273,7 @@ export default function SupportPage() {
                 style={{
                   display: "block",
                   padding: "13px 18px",
-                  color: "#387ED1",
+                  color: "var(--signal)",
                   fontSize: 14,
                   textDecoration: "none",
                   borderBottom: i < QUICK_LINKS.length - 1 ? "1px solid #f0f0f0" : "none",

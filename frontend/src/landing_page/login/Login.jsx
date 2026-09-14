@@ -6,19 +6,39 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const backendUrl =
+      import.meta.env.VITE_BACKEND_URL || "http://localhost:3002";
+    const dashboardUrl =
+      import.meta.env.VITE_DASHBOARD_URL || "http://localhost:3001";
     try {
-      const res = await fetch("http://localhost:3002/api/auth/login", {
+      const res = await fetch(`${backendUrl}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile: phone, password }),
       });
-      const data = await res.json();
-      if (res.ok) {
-        const user = JSON.stringify({ mobile: phone, token: data.token });
-        const encoded = encodeURIComponent(user);
-        window.location.href = `http://localhost:3001/dashboard?user=${encoded}`;
+      // Backend sends JSON on success but plain text on errors,
+      // so parse defensively instead of res.json() (which throws).
+      const text = await res.text();
+      let data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        data = text;
+      }
+      if (res.ok && data.token) {
+        // NOTE: frontend (:5173) and dashboard (:3001) are different
+        // origins, so localStorage is NOT shared between them. Hand the
+        // session over via a one-time ?user= query param — the dashboard
+        // moves it into its own localStorage and strips it from the URL
+        // on first load (see dashboard src/utils/api.js).
+        localStorage.setItem("kite_token", data.token);
+        localStorage.setItem("kite_mobile", phone);
+        const handoff = encodeURIComponent(
+          JSON.stringify({ mobile: phone, token: data.token })
+        );
+        window.location.href = `${dashboardUrl}/?user=${handoff}`;
       } else {
-        alert(data);
+        alert(typeof data === "string" && data ? data : "Invalid credentials");
       }
     } catch (err) {
       alert("Server error");
@@ -28,14 +48,14 @@ function Login() {
   return (
     <div className="container">
       <div className="row Signup-Main">
-        <div className="col-6">
+        <div className="col-6 d-none d-md-block">
           <img
             className="account_openImage"
             src="media/images/account_open.svg"
             alt=""
           />
         </div>
-        <div className="col-6 SignUp-form">
+        <div className="col-12 col-md-6 SignUp-form">
           <h2>Login</h2>
 
           <form onSubmit={handleLogin}>

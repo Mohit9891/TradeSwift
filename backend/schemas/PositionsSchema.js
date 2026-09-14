@@ -1,14 +1,17 @@
 const { Schema } = require("mongoose");
 
 const PositionsSchema = new Schema({
-  product: String,
+  userMobile: { type: String, index: true }, // owner; pre-Phase-0 rows have none
+  product: String, // MIS | NRML (intraday/overnight derivatives & intraday equity)
   name: String,
-  qty: Number,
+  qty: Number, // signed: +long / -short
   avg: Number,
-  price: Number,
+  price: Number, // last known LTP (refreshed live on client; Phase 2 stamps server-side)
+  realizedPnl: { type: Number, default: 0 }, // booked by partial/full exits
   net: String,
   day: String,
   isLoss:Boolean,
+  updatedAt: { type: Date, default: Date.now },
 });
 
 module.exports = { PositionsSchema };

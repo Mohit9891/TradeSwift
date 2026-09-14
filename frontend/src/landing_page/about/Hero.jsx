@@ -3,50 +3,37 @@ import React from "react";
 function Hero() {
   return (
     <div className="container mt-5">
-      <div className="row mt-5 mb-4 p-5 border-bottom  ">
-        <h2 className="text-center fs-2 text-muted">
-          We pioneered the discount broking model in India. <br />
-          Now, we are breaking ground with our technology.
-        </h2>
-        
+      <div className="row mt-5 mb-4 p-5 border-bottom">
+        <div className="text-center">
+          <span className="signal-tag">About</span>
+          <h2 className="fs-2">
+            A trading dashboard you can break safely. <br />
+            That's the whole idea.
+          </h2>
+        </div>
       </div>
       <div className="row">
-     <div style={{fontSize:"17px",lineHeight:"30px"}} className="col-6 p-5 mt-4 text-muted">
+        <div style={{ fontSize: "17px", lineHeight: "30px" }} className="col-12 col-md-6 p-3 p-md-5 mt-4 text-muted">
           <p>
-            We kick-started operations on the 15th of August, 2010 with the goal
-            of breaking all barriers that traders and investors face in India in
-            terms of cost, support, and technology. We named the company
-            Zerodha, a combination of Zero and "Rodha", the Sanskrit word for
-            barrier.
-          </p>
-
-          <p>
-            Today, our disruptive pricing models and in-house technology have
-            made us the biggest stock broker in India.
+            TradeSwift is a paper-trading simulator: live prices,
+            real order types, margin blocks and a paise-accurate ledger —
+            with ₹1,00,000 of fictional cash instead of a demat account.
           </p>
           <p>
-            Over 1.6+ crore clients place billions of orders every year through
-            our powerful ecosystem of investment platforms, contributing over
-            15% of all Indian retail trading volumes.
+            It was built to answer one question: how much of a brokerage
+            dashboard can you faithfully recreate without an exchange,
+            clearing corporation, or a single rupee?
           </p>
         </div>
-        <div style={{fontSize:"17px",lineHeight:"30px"}} className="col-6 p-5 mt-4 text-muted">
+        <div style={{ fontSize: "17px", lineHeight: "30px" }} className="col-12 col-md-6 p-3 p-md-5 mt-4 text-muted">
           <p>
-            In addition, we run a number of popular open online educational and
-            community initiatives to empower retail traders and investors.
+            Under the hood: a MERN stack with WebSocket price rooms, a
+            matching engine for LIMIT and stop orders, average-costed
+            positions with realized P&L, and an append-only funds ledger.
           </p>
           <p>
-            Rainmatter, our fintech fund and incubator, has invested in several
-            fintech startups with the goal of growing the Indian capital
-            markets.
-          </p>
-          <p>
-            <p>
-              And yet, we are always up to something new every day. Catch up on
-              the latest updates on our blog or see what the media is saying
-              about us or learn more about our business and product
-              philosophies.
-            </p>
+            Nothing here is investment advice and nothing here trades real
+            securities. Break things, learn fast.
           </p>
         </div>
       </div>

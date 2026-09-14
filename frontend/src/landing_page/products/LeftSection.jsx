@@ -1,28 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const products = [
   {
-    title: 'Kite',
-    description: 'Our ultra-fast flagship trading platform with streaming market data, advanced charts, an elegant UI, and more. Enjoy the Kite experience seamlessly on your Android and iOS devices.',
+    title: 'Dashboard',
+    tag: 'Watch · ticket · tape',
+    shot: 'shot-a',
+    initial: 'T',
+    description: 'Streaming watchlists, a three-step order ticket and a live order tape — the trading surface, redesigned as a monitoring desk.',
     links: [
-      { label: 'Try demo', url: 'https://kite-demo.zerodha.com/' },
-      { label: 'Learn more', url: 'https://zerodha.com/products/kite' },
+      { label: 'Open dashboard', to: '/login' },
+      { label: 'How orders work', to: '/support' },
     ],
-    img: 'media/images/kite.png',
   },
   {
-    title: 'Coin',
-    description: 'Buy direct mutual funds online, commission-free, delivered directly to your Demat account. Enjoy the investment experience on your Android and iOS devices.',
+    title: 'Positions',
+    tag: 'MIS · NRML · converts',
+    shot: 'shot-b',
+    initial: 'P',
+    description: 'Average-costed intraday positions with live P&L, one-tap square-offs and delivery converts. Shorts allowed — it is practice money.',
     links: [
-      { label: 'Learn more', url: 'https://coin.zerodha.com/' },
+      { label: 'Try the demo', to: '/signup' },
     ],
-    img: 'media/images/coin.png',
   },
   {
-    title: 'Varsity mobile',
-    description: 'An easy to grasp, collection of stock market lessons with in-depth coverage and illustrations. Content is broken down into bite-size cards to help you learn on the go.',
+    title: 'Learn mode',
+    tag: 'Practice paths',
+    shot: 'shot-c',
+    initial: 'L',
+    description: 'Start with delivery trades, graduate to intraday MIS, then weekly NIFTY options — one dashboard, increasing realism.',
     links: [],
-    img: 'media/images/varsity.png',
   },
 ];
 
@@ -30,18 +37,21 @@ function LeftSection() {
   return (
     <div className="container">
       {products.map((product, index) => (
-        <div key={index} className="row align-items-center" style={{ padding: '60px 0', borderBottom: '1px solid #eee' }}>
-          <div className="col-6">
-            <img src={product.img} alt={product.title} style={{ width: '100%' }} />
+        <div key={index} className="row align-items-center" style={{ padding: '60px 0', borderBottom: '1px solid var(--line)' }}>
+          <div className="col-12 col-md-6">
+            <div className={`product-shot ${product.shot}`}>
+              <span className="shot-tag">{product.tag}</span>
+              <span className="shot-initial">{product.initial}</span>
+            </div>
           </div>
-          <div className="col-6" style={{ paddingLeft: '40px' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: '500' }}>{product.title}</h2>
-            <p style={{ color: '#555', lineHeight: '1.8' }}>{product.description}</p>
+          <div className="col-12 col-md-6" style={{ paddingLeft: '40px' }}>
+            <h2 style={{ fontSize: '24px' }}>{product.title}</h2>
+            <p style={{ color: 'var(--ink-soft)', lineHeight: '1.8' }}>{product.description}</p>
             <div style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
               {product.links.map((link, i) => (
-                <a key={i} href={link.url} style={{ color: '#387ed1', textDecoration: 'none' }}>
+                <Link key={i} to={link.to} style={{ textDecoration: 'none' }}>
                   {link.label} →
-                </a>
+                </Link>
               ))}
             </div>
           </div>

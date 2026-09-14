@@ -5,8 +5,10 @@ function SignUp() {
   const [password, setPassword] = useState("");
 const handleSubmit = async (e) => {
   e.preventDefault();
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:3002";
   try {
-    const res = await fetch("http://localhost:3002/api/auth/signup", {
+    const res = await fetch(`${backendUrl}/api/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mobile: phone, password }),  // mobile not phone
@@ -29,19 +31,19 @@ const handleSubmit = async (e) => {
           Open a free demat and trading account online
         </h1>
         <h3 className="Signup-heading-2">
-          Start investing brokerage free and join a community of 1.6+ crore
-          investors and traders
+          Start paper trading free and join learners practicing with ₹1,00,000
+          of demo cash
         </h3>
       </div>
       <div className="row Signup-Main">
-        <div className="col-6">
+        <div className="col-6 d-none d-md-block">
           <img
             className="account_openImage"
             src="media/images/account_open.svg"
             alt=""
           />
         </div>
-        <div className="col-6 SignUp-form">
+        <div className="col-12 col-md-6 SignUp-form">
           <h2>Create Account</h2>
           <span>Start your investment journey</span>
 

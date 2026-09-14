@@ -1,0 +1,336 @@
+/* TradeSwift identity — warm paper dashboard. Loaded after index.css. */
+
+:root {
+  --paper: #f4f1ea;
+  --card: #ffffff;
+  --ink: #1a1c22;
+  --ink-soft: #6b6f7a;
+  --signal: #2f3e9e;
+  --signal-soft: rgba(47, 62, 158, 0.1);
+  --rise: #0e7c6b;
+  --rise-wash: rgba(14, 124, 107, 0.14);
+  --fall: #c4552d;
+  --fall-wash: rgba(196, 85, 45, 0.14);
+  --line: #e4dfd3;
+  --radius: 12px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, .title {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ---------- tick wash (direction never color-alone) ---------- */
+@keyframes wash-rise {
+  0% { background-color: var(--rise-wash); }
+  100% { background-color: transparent; }
+}
+@keyframes wash-fall {
+  0% { background-color: var(--fall-wash); }
+  100% { background-color: transparent; }
+}
+.flash-rise { animation: wash-rise 0.45s var(--ease); border-radius: 6px; }
+.flash-fall { animation: wash-fall 0.45s var(--ease); border-radius: 6px; }
+
+.tone-rise { color: var(--rise); }
+.tone-fall { color: var(--fall); }
+
+/* ---------- signal strip ---------- */
+.signal-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.signal-card {
+  min-width: 168px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.signal-card .sig-key {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.signal-card .sig-price {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+}
+.signal-card .sig-sub { font-size: 12px; }
+
+/* ---------- instrument grid ---------- */
+.desk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  gap: 12px;
+  padding: 4px 2px 12px;
+}
+.inst-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  position: relative;
+}
+.inst-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 28, 34, 0.08);
+}
+.inst-card.selected { border-color: var(--signal); box-shadow: 0 0 0 1px var(--signal); }
+.inst-card .inst-head { display: flex; justify-content: space-between; align-items: baseline; }
+.inst-card .inst-name { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+.inst-card .inst-xchg {
+  font-size: 10px; color: var(--ink-soft); border: 1px solid var(--line);
+  border-radius: 20px; padding: 1px 8px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.inst-card .inst-price { font-family: var(--font-mono); font-size: 24px; font-weight: 600; margin: 2px 0; }
+.inst-card .inst-foot { display: flex; justify-content: space-between; align-items: center; }
+.chip {
+  font-size: 11px; font-weight: 600; border-radius: 20px; padding: 2px 10px;
+  font-variant-numeric: tabular-nums;
+}
+.chip.rise { background: var(--rise-wash); color: var(--rise); }
+.chip.fall { background: var(--fall-wash); color: var(--fall); }
+.inst-actions { display: flex; gap: 4px; }
+.icon-btn {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 8px; font-size: 12px; font-weight: 600; padding: 4px 10px; cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--signal); color: var(--signal); }
+.icon-btn.primary { background: var(--signal); border-color: var(--signal); color: #fff; }
+
+/* ---------- segmented control ---------- */
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg button {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.seg button.on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.seg.signal button.on { background: var(--signal); border-color: var(--signal); color: #fff; }
+
+/* ---------- docked ticket ---------- */
+.ticket-dock {
+  position: fixed;
+  top: 76px;
+  right: 16px;
+  width: 344px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(26, 28, 34, 0.16);
+  overflow-x: hidden;
+  z-index: 200;
+  animation: ticket-in 0.35s var(--ease);
+}
+@keyframes ticket-in {
+  from { transform: translateX(24px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.ticket-side-buy { box-shadow: inset 0 4px 0 var(--rise); }
+.ticket-side-sell { box-shadow: inset 0 4px 0 var(--fall); }
+.ticket-head { padding: 14px 16px 10px; border-bottom: 1px dashed var(--line); }
+.ticket-head .ticket-sym { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+.ticket-head .ticket-live { font-family: var(--font-mono); font-size: 30px; font-weight: 600; }
+.ticket-step { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); font-weight: 600; }
+.ticket-body { padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 12px; }
+.ticket-field label { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+.ticket-field input {
+  width: 100%; font-family: var(--font-mono); font-size: 16px;
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--paper);
+}
+.ticket-commit {
+  border: none; border-radius: 10px; padding: 12px; font-size: 15px; font-weight: 700;
+  font-family: var(--font-display); cursor: pointer; color: #fff;
+}
+.ticket-commit.buy { background: var(--rise); }
+.ticket-commit.sell { background: var(--fall); }
+.ticket-commit:disabled { opacity: 0.55; cursor: wait; }
+.ticket-note { font-size: 12px; color: var(--ink-soft); }
+.ticket-error { font-size: 12px; color: var(--fall); font-weight: 600; }
+.ticket-ok { font-size: 12px; color: var(--rise); font-weight: 600; }
+.ticket-stale {
+  font-size: 12px; background: #fdf3e3; border: 1px solid #ead9b6; color: #8a5a12;
+  border-radius: 8px; padding: 6px 10px;
+}
+
+/* ---------- portfolio ---------- */
+.equity-hero {
+  background: var(--ink); color: var(--paper);
+  border-radius: 16px; padding: 20px 24px; margin-bottom: 14px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.equity-hero .hero-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; }
+.equity-hero .hero-num { font-family: var(--font-mono); font-size: 40px; font-weight: 600; line-height: 1; }
+.equity-hero .hero-num.rise { color: #5fd6b5; }
+.equity-hero .hero-num.fall { color: #f0926a; }
+.treemap { display: flex; gap: 8px; min-height: 120px; margin-bottom: 14px; }
+.treemap .tile {
+  border-radius: var(--radius); padding: 10px 12px; color: #fff;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  transition: flex 0.4s var(--ease); min-width: 90px; overflow: hidden;
+}
+.treemap .tile small { opacity: 0.85; font-size: 11px; }
+.treemap .tile b { font-family: var(--font-mono); font-size: 15px; }
+.pos-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 16px; margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.pos-card .pos-sym { font-family: var(--font-display); font-weight: 700; }
+.pos-card .pos-meta { font-size: 12px; color: var(--ink-soft); }
+.pnl-track { height: 6px; border-radius: 4px; background: var(--line); position: relative; overflow: hidden; margin-top: 6px; }
+.pnl-track i { position: absolute; top: 0; bottom: 0; border-radius: 4px; transition: all 0.4s var(--ease); }
+
+/* ---------- tape timeline ---------- */
+.tape-day { font-family: var(--font-display); font-size: 13px; color: var(--ink-soft); margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+.tape-entry {
+  display: flex; gap: 12px; background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 10px 14px; margin-bottom: 8px; align-items: center;
+}
+.tape-entry.fresh { animation: wash-rise 1.2s var(--ease); }
+.pip { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.pip.complete { background: var(--rise); }
+.pip.cancelled { background: #b9b3a6; }
+.pip.rejected { background: var(--fall); }
+.pip.open, .pip.pending { border: 2px solid var(--signal); background: transparent; animation: pip-pulse 1.6s infinite; }
+@keyframes pip-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ---------- profile hover card ---------- */
+.profile { position: relative; cursor: pointer; }
+.profile-card {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  min-width: 190px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(26, 28, 34, 0.16);
+  padding: 12px 14px;
+  z-index: 300;
+  animation: ticket-in 0.25s var(--ease);
+}
+.profile:hover .profile-card { display: block; }
+.profile-card .profile-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 2px;
+}
+.profile-card .profile-number {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+}
+
+/* ---------- density ---------- */
+[data-density="compact"] .desk-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+[data-density="compact"] .inst-card { padding: 8px 10px; }
+[data-density="compact"] .inst-card .inst-price { font-size: 19px; }
+[data-density="compact"] .inst-card svg.spark { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-rise, .flash-fall, .tape-entry.fresh { animation: none; }
+  .pip.open, .pip.pending { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* ================= responsive ================= */
+@media (max-width: 1024px) {
+  .menus ul {
+    display: flex;
+    overflow-x: auto;
+    max-width: 60vw;
+    padding-bottom: 4px;
+  }
+  .menus li { margin-right: 18px; flex-shrink: 0; }
+  .content { padding: 3% 3%; }
+}
+
+@media (max-width: 768px) {
+  /* shell stacks vertically */
+  .dashboard-container { flex-direction: column; height: auto; min-height: 90vh; }
+  .watchlist-container {
+    flex-basis: auto;
+    width: 100%;
+    max-height: 42vh;
+    box-shadow: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .content { flex-basis: auto; width: 100%; }
+
+  /* top nav compresses */
+  .topbar-container { height: auto; min-height: 64px; flex-wrap: wrap; padding: 6px 0; }
+  .menu-container { padding: 6px 12px; flex-wrap: wrap; row-gap: 6px; }
+  .menu-container > img { width: 34px !important; }
+  .menus ul { max-width: 100%; }
+  .menus li { margin-right: 14px; }
+  .profile-card { position: fixed; left: 12px; right: 12px; bottom: 12px; top: auto; min-width: 0; }
+
+  /* signal strip stays swipeable */
+  .signal-strip { padding: 8px 10px; }
+  .signal-card { min-width: 140px; }
+  .signal-card .sig-price { font-size: 17px; }
+
+  /* cards + grid */
+  .desk-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+  .inst-card .inst-price { font-size: 20px; }
+
+  /* ticket becomes a bottom sheet */
+  .ticket-dock {
+    top: auto;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-height: 78vh;
+  }
+
+  /* portfolio stacks */
+  .equity-hero { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px; }
+  .equity-hero .hero-num { font-size: 30px; }
+  .treemap { flex-wrap: wrap; }
+  .treemap .tile { flex: 1 1 40% !important; min-height: 84px; }
+  .pos-card { flex-direction: column; align-items: stretch; }
+  .funds .row, .row { flex-direction: column; }
+  .funds .col, .row .col, .col { flex-basis: auto; width: 100%; }
+  .data { width: 100%; }
+
+  /* tape entries wrap actions below */
+  .tape-entry { flex-wrap: wrap; }
+
+  /* legacy tables scroll instead of squeezing */
+  .order-table { overflow-x: auto; }
+  .order-table table { min-width: 560px; }
+}

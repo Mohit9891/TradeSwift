@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
+import './signal.css';
 import Homepage from './landing_page/home/HomePage';
 import SignUp from './landing_page/signup/SignUp';
 import AboutPage from './landing_page/about/AboutPage';

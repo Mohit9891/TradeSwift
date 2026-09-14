@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
+import GeneralContext from "./GeneralContext";
 
 const Menu = () => {
+  const { logout } = useContext(GeneralContext);
   const [selectedMenu, setSelectedMenu] = useState(0);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const mobile = localStorage.getItem("kite_mobile") || localStorage.getItem("mobile") || "USERID";
+  const initials = mobile.slice(0, 2).toUpperCase();
 
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
-  };
-
-  const handleProfileClick = (index) => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
   const menuClass = "menu";
@@ -80,19 +79,25 @@ const Menu = () => {
           <li>
             <Link
               style={{ textDecoration: "none" }}
-              to="/apps"
-              onClick={() => handleMenuClick(6)}
+              to="/chart"
+              onClick={() => handleMenuClick(7)}
             >
-              <p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
-                Apps
+              <p className={selectedMenu === 7 ? activeMenuClass : menuClass}>
+                Chart
               </p>
             </Link>
           </li>
         </ul>
         <hr />
-        <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+        <div className="profile">
+          <div className="avatar">{initials}</div>
+          <div className="profile-card">
+            <p className="profile-name">Trader</p>
+            <p className="profile-number num">{mobile}</p>
+            <button className="icon-btn" onClick={logout}>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>

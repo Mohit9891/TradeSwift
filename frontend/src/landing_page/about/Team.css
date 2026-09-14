@@ -1,6 +1,6 @@
 /* ── Page wrapper ── */
 .team-page {
-  background: #f9f9f7;
+  background: var(--paper);
   padding: 48px 0 64px;
   min-height: 100vh;
 }
@@ -32,20 +32,20 @@
 }
 
 .section-tag {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #387ed1;
+  color: var(--signal);
   display: block;
   margin-bottom: 10px;
 }
 
 .founder-name {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 700;
   color: #111;
-  margin: 0 0 2px;
+  margin: 0 0 4px;
 }
 
 .founder-title {
@@ -55,7 +55,7 @@
 }
 
 .hero-bio {
-  font-size: 13px;
+  font-size: 16px;
   color: #444;
   line-height: 1.7;
   margin-bottom: 8px;
@@ -98,7 +98,7 @@
 }
 
 .team-section-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -109,8 +109,8 @@
 /* ── Cards grid ── */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(540px, 1fr));
+  gap: 80px;
 }
 
 /* ── Card ── */
@@ -147,26 +147,26 @@
 }
 
 .team-card-body {
-  padding: 12px;
+  padding: 30px;
 }
 
 .team-card-name {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 25px;
+  font-weight: 700;
   color: #111;
-  margin: 0 0 2px;
-}
-
-.team-card-role {
-  font-size: 11px;
-  color: #387ed1;
-  font-weight: 500;
   margin: 0 0 6px;
 }
 
+.team-card-role {
+  font-size: 15px;
+  color: var(--signal);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
 .team-card-bio {
-  font-size: 11px;
-  color: #888;
-  line-height: 1.5;
+  font-size: 16.5px;
+  color: #555;
+  line-height: 1.7;
   margin: 0;
 }

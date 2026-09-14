@@ -1,0 +1,198 @@
+/* TradeSwift landing identity — warm paper, shared tokens with the dashboard. */
+
+:root {
+  --paper: #f4f1ea;
+  --card: #ffffff;
+  --ink: #1a1c22;
+  --ink-soft: #6b6f7a;
+  --signal: #2f3e9e;
+  --signal-soft: rgba(47, 62, 158, 0.1);
+  --rise: #0e7c6b;
+  --rise-wash: rgba(14, 124, 107, 0.14);
+  --fall: #c4552d;
+  --fall-wash: rgba(196, 85, 45, 0.14);
+  --line: #e4dfd3;
+  --radius: 12px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+body {
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: var(--font-body) !important;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+a { color: var(--signal); }
+
+/* Bootstrap primary → signal ink */
+.btn-primary {
+  background-color: var(--signal) !important;
+  border-color: var(--signal) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-display);
+  font-weight: 600 !important;
+}
+.btn-primary:hover {
+  background-color: #26327f !important;
+  border-color: #26327f !important;
+}
+.text-primary { color: var(--signal) !important; }
+.bg-body-tertiary { background-color: var(--paper) !important; }
+
+/* Navbar */
+.signal-nav {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--line);
+}
+.signal-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink) !important;
+  text-decoration: none;
+}
+.signal-wordmark span { color: var(--signal); }
+.nav-hover { color: var(--ink-soft) !important; font-weight: 500; }
+.nav-hover:hover { color: var(--signal) !important; }
+
+/* Footer */
+.signal-footer {
+  background: var(--card) !important;
+  border-top: 1px solid var(--line) !important;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+.signal-footer h6 { font-family: var(--font-display); color: var(--ink); }
+
+/* Cards / sections */
+.signal-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.signal-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--signal);
+  background: var(--signal-soft);
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin-bottom: 12px;
+}
+.signal-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hero dashboard mock */
+.dash-mock {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 18px;
+  color: var(--paper);
+  box-shadow: 0 24px 64px rgba(26, 28, 34, 0.22);
+  text-align: left;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.dash-mock .tm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgba(244, 241, 234, 0.12);
+  font-size: 14px;
+}
+.dash-mock .tm-row:last-child { border-bottom: none; }
+.tm-up { color: #5fd6b5; }
+.tm-down { color: #f0926a; }
+
+/* Product shot placeholder (replaces vendor screenshots) */
+.product-shot {
+  border-radius: 16px;
+  padding: 48px 32px;
+  color: #fff;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.product-shot .shot-initial {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.9;
+}
+.product-shot .shot-tag {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+}
+.shot-a { background: linear-gradient(135deg, #2f3e9e, #6a5acd); }
+.shot-b { background: linear-gradient(135deg, #0e7c6b, #2f9e8f); }
+.shot-c { background: linear-gradient(135deg, #1a1c22, #4a4e5c); }
+.shot-d { background: linear-gradient(135deg, #c4552d, #e08a4c); }
+.shot-e { background: linear-gradient(135deg, #5b3e9e, #9e5ab0); }
+
+/* Support portal accents */
+.support-shell { background: var(--paper); }
+.support-shell a { color: var(--signal); }
+
+/* Auth pages */
+.auth-card,
+.SignUp-form {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+}
+.auth-card h2,
+.SignUp-form h2 { font-family: var(--font-display); }
+.Signup-heading-1 { font-family: var(--font-display); }
+.Signup-Main { align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* ================= responsive ================= */
+@media (max-width: 768px) {
+  /* support portal stacks */
+  .support-grid {
+    grid-template-columns: 1fr !important;
+    padding: 20px 16px !important;
+  }
+
+  /* wide tables scroll instead of squeezing */
+  .container table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .container table tbody,
+  .container table thead { display: table; width: 100%; min-width: 560px; }
+
+  /* hero + shots breathe on small screens */
+  .dash-mock { padding: 12px; }
+  .product-shot { min-height: 180px; padding: 32px 20px; }
+  .product-shot .shot-initial { font-size: 52px; }
+
+  /* auth art already hidden; form full width */
+  .SignUp-form { padding: 24px 20px; }
+  .Signup-Main { margin: 0; }
+}

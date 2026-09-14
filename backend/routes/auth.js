@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const User = require("../models/User");
+const { ensureOpeningBalance } = require("../services/fundsService");
 
 const JWT_SECRET = process.env.JWT_SECRET || "Chill";
 
@@ -35,6 +36,7 @@ router.post("/login", async (req, res) => {
   if (!isMatch) return res.status(401).send("Invalid credentials");
 
   const token = jwt.sign({ mobile }, JWT_SECRET, { expiresIn: "1h" });
+  await ensureOpeningBalance(mobile); // Phase 0: every trader starts with demo float
   res.json({ token });
 });
 
@@ -53,9 +55,15 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-// Protected route
+// Protected route (legacy plain-text check)
 router.get("/dashboard", authMiddleware, (req, res) => {
   res.send(`Welcome user with mobile ${req.user.mobile}, to the dashboard`);
 });
 
+// Session check used by dashboard AuthGuard: GET /api/auth/me
+router.get("/me", authMiddleware, (req, res) => {
+  res.json({ mobile: req.user.mobile });
+});
+
 module.exports = router;
+module.exports.authMiddleware = authMiddleware;
