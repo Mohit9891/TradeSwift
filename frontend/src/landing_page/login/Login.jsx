@@ -1,20 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Login() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:3002";
+  const dashboardUrl =
+    import.meta.env.VITE_DASHBOARD_URL || "http://localhost:3001";
+
+  // Wake the free-tier backend in the background while the user types,
+  // so the actual login rarely pays the 30-60s cold-start penalty.
+  useEffect(() => {
+    fetch(`${backendUrl}/`, { mode: "no-cors" }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const backendUrl =
-      import.meta.env.VITE_BACKEND_URL || "http://localhost:3002";
-    const dashboardUrl =
-      import.meta.env.VITE_DASHBOARD_URL || "http://localhost:3001";
+    if (busy) return;
+    setBusy(true);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 25000);
     try {
       const res = await fetch(`${backendUrl}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mobile: phone, password }),
+        signal: ctrl.signal,
       });
       // Backend sends JSON on success but plain text on errors,
       // so parse defensively instead of res.json() (which throws).
@@ -41,7 +55,14 @@ function Login() {
         alert(typeof data === "string" && data ? data : "Invalid credentials");
       }
     } catch (err) {
-      alert("Server error");
+      if (err.name === "AbortError") {
+        alert("Server is waking up (free hosting sleeps when idle). Wait 30 seconds and try again.");
+      } else {
+        alert("Server error");
+      }
+    } finally {
+      clearTimeout(timer);
+      setBusy(false);
     }
   };
 
@@ -78,8 +99,8 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary mt-4">
-              Login
+            <button type="submit" className="btn btn-primary mt-4" disabled={busy}>
+              {busy ? "Logging in…" : "Login"}
             </button>
             <p className="mt-3">
               Don't have an account?{" "}
